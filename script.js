@@ -103,18 +103,22 @@ document
 const fillQuestions = [
     {
         question: "Myanmar people eat rice, which is rich in ______.",
+        choices: ["starch", "protein", "vitamin"],
         answer: "starch"
     },
     {
         question: "Most people in Myanmar eat ______ at least once a day.",
+        choices: ["fish", "meat", "vegetables"],
         answer: "fish"
     },
     {
         question: "We need ______ to build and repair body tissues.",
+        choices: ["protein", "starch", "sugar"],
         answer: "protein"
     },
     {
         question: "______ is a common source of protein in our diet.",
+        choices: ["meat", "rice", "fruit"],
         answer: "meat"
     }
 ];
@@ -126,11 +130,27 @@ function showFillQuestion() {
     const q = fillQuestions[currentFillQuestion];
 
     fillblank.innerHTML = `
-        <h2>Fill in the Blanks</h2>
+        <h2>✏️ Fill in the Blanks</h2>
+
         <h3>Question ${currentFillQuestion + 1} / ${fillQuestions.length}</h3>
+
         <p>${q.question}</p>
 
-        <input type="text" id="fillAnswer" placeholder="Type your answer">
+        <p><strong>Choose from:</strong></p>
+
+        <div class="answer-choices">
+            ${q.choices.map(choice => `
+                <span>${choice}</span>
+            `).join("")}
+        </div>
+
+        <br>
+
+        <input
+            type="text"
+            id="fillAnswer"
+            placeholder="Type your answer here"
+        >
 
         <br><br>
 
@@ -145,7 +165,8 @@ function checkFillAnswer() {
     const result = document.getElementById("fillResult");
 
     const userAnswer = input.value.trim().toLowerCase();
-    const correctAnswer = fillQuestions[currentFillQuestion].answer.toLowerCase();
+    const correctAnswer =
+        fillQuestions[currentFillQuestion].answer.toLowerCase();
 
     if (userAnswer === correctAnswer) {
 
@@ -157,9 +178,9 @@ function checkFillAnswer() {
             if (currentFillQuestion < fillQuestions.length) {
                 showFillQuestion();
             } else {
-                fillblank.innerHTML = `
+                document.getElementById("fillblank").innerHTML = `
                     <h2>🎉 Excellent!</h2>
-                    <p>You completed all 4 fill-in-the-blank questions.</p>
+                    <p>You completed all 4 questions.</p>
                     <p>Great job! 👏</p>
                 `;
             }
