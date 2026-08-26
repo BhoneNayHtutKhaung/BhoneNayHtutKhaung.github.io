@@ -100,3 +100,79 @@ document
         currentQuestion = 0;
         showQuestion();
     });
+const fillQuestions = [
+    {
+        question: "Myanmar people eat rice, which is rich in ______.",
+        answer: "starch"
+    },
+    {
+        question: "Most people in Myanmar eat ______ at least once a day.",
+        answer: "fish"
+    },
+    {
+        question: "We need ______ to build and repair body tissues.",
+        answer: "protein"
+    },
+    {
+        question: "______ is a common source of protein in our diet.",
+        answer: "meat"
+    }
+];
+
+let currentFillQuestion = 0;
+
+function showFillQuestion() {
+    const fillblank = document.getElementById("fillblank");
+    const q = fillQuestions[currentFillQuestion];
+
+    fillblank.innerHTML = `
+        <h2>Fill in the Blanks</h2>
+        <h3>Question ${currentFillQuestion + 1} / ${fillQuestions.length}</h3>
+        <p>${q.question}</p>
+
+        <input type="text" id="fillAnswer" placeholder="Type your answer">
+
+        <br><br>
+
+        <button onclick="checkFillAnswer()">Check Answer</button>
+
+        <p id="fillResult"></p>
+    `;
+}
+
+function checkFillAnswer() {
+    const input = document.getElementById("fillAnswer");
+    const result = document.getElementById("fillResult");
+
+    const userAnswer = input.value.trim().toLowerCase();
+    const correctAnswer = fillQuestions[currentFillQuestion].answer.toLowerCase();
+
+    if (userAnswer === correctAnswer) {
+
+        result.innerHTML = "✅ Correct!";
+
+        setTimeout(() => {
+            currentFillQuestion++;
+
+            if (currentFillQuestion < fillQuestions.length) {
+                showFillQuestion();
+            } else {
+                fillblank.innerHTML = `
+                    <h2>🎉 Excellent!</h2>
+                    <p>You completed all 4 fill-in-the-blank questions.</p>
+                    <p>Great job! 👏</p>
+                `;
+            }
+        }, 800);
+
+    } else {
+        result.innerHTML = "❌ Wrong answer. Try again!";
+    }
+}
+
+document
+    .querySelector('a[href="#fillblank"]')
+    .addEventListener("click", function () {
+        currentFillQuestion = 0;
+        showFillQuestion();
+    });
