@@ -103,23 +103,18 @@ document
 const fillQuestions = [
     {
         question: "Myanmar people eat rice, which is rich in ______.",
-        choices: ["starch", "protein", "vitamin"],
+        choices: ["starch", "disturb", "harm"],
         answer: "starch"
     },
     {
-        question: "Most people in Myanmar eat ______ at least once a day.",
-        choices: ["fish", "meat", "vegetables"],
-        answer: "fish"
+        question: "Don't ______ your dad. He is very busy now.",
+        choices: ["starch", "disturb", "harm"],
+        answer: "disturb"
     },
     {
-        question: "We need ______ to build and repair body tissues.",
-        choices: ["protein", "starch", "sugar"],
-        answer: "protein"
-    },
-    {
-        question: "______ is a common source of protein in our diet.",
-        choices: ["meat", "rice", "fruit"],
-        answer: "meat"
+        question: "You should stop smoking. It can ______ your healthy.",
+        choices: ["starch", "disturb", "harm"],
+        answer: "harm"
     }
 ];
 
@@ -136,12 +131,12 @@ function showFillQuestion() {
 
         <p>${q.question}</p>
 
-        <p><strong>Choose from:</strong></p>
+        <p><strong>Answers:</strong></p>
 
         <div class="answer-choices">
-            ${q.choices.map(choice => `
-                <span>${choice}</span>
-            `).join("")}
+            <span>starch</span>
+            <span>disturb</span>
+            <span>harm</span>
         </div>
 
         <br>
@@ -180,7 +175,7 @@ function checkFillAnswer() {
             } else {
                 document.getElementById("fillblank").innerHTML = `
                     <h2>🎉 Excellent!</h2>
-                    <p>You completed all 4 questions.</p>
+                    <p>You completed all 3 questions.</p>
                     <p>Great job! 👏</p>
                 `;
             }
